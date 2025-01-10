@@ -1,25 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package karya;
 
-import java.awt.Dialog;
-import java.awt.Image;
-import java.awt.event.KeyEvent;
-import javax.swing.ImageIcon;
-import sun.invoke.empty.Empty;
+import java.text.DecimalFormat;
+import javafx.scene.control.CheckBox;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
-/**
- *
- * @author ASUS
- */
 public class Tampilan extends javax.swing.JFrame {
+
+    //deklarasi variabel
+    public static ModelMenu[] menu;
+    public static String tampil;
+    int bayar;
+    float diskon;
+    public static String seteruk;
 
     public Tampilan() {
         initComponents();
-        setExtendedState(this.MAXIMIZED_BOTH);
+       //etExtendedState(this.MAXIMIZED_BOTH);
+       //etLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")
@@ -572,7 +571,7 @@ public class Tampilan extends javax.swing.JFrame {
         jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/karya/pngtree-ice-tea-drink-in-a-fresh-glass-cup-png-image_7692811.png"))); // NOI18N
         jLabel22.setText("jLabel22");
         jPanel1.add(jLabel22);
-        jLabel22.setBounds(360, 100, 910, 1150);
+        jLabel22.setBounds(420, 90, 910, 1150);
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel20.setText("PROMOOO!!!!");
@@ -585,7 +584,7 @@ public class Tampilan extends javax.swing.JFrame {
         jLabel23.setBounds(30, 550, 680, 30);
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel24.setText("Beli Es Jeruk lebih Dari 6. Diskon 20%");
+        jLabel24.setText("Beli Es Jeruk lebih Dari 5. Diskon 30%");
         jPanel1.add(jLabel24);
         jLabel24.setBounds(30, 580, 710, 70);
 
@@ -646,273 +645,106 @@ public class Tampilan extends javax.swing.JFrame {
         cbxmilktea.setSelected(false);
         txapesan.setText("Silahkan Pesan");
     }//GEN-LAST:event_btnresetActionPerformed
-    
+
     private void btnkeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnkeluarActionPerformed
         System.exit(0);
     }//GEN-LAST:event_btnkeluarActionPerformed
 
     private void btnpesanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpesanActionPerformed
-      
-        String tampil;
         tampil = "";
-        int bayar = 0;
-       
-        if (Cbxbakso.isSelected()) {
-            if (!txtjumlah1.getText().isEmpty()) {
-                int jumlah = Integer.parseInt(txtjumlah1.getText());
-                if (jumlah > 0) { 
-                    int total = 0;
-                    int st = Integer.parseInt(stokBakso.getText()); 
-                    if (jumlah>st){
-                             tampil += "MAAF STOK BAKSO TIDAK CUKUP" + "\n"; 
-                             txapesan.setText(tampil + "=============================");
-                            }
-                    else if (jumlah <= st && jumlah>5 && jumlah <= 50) {
-                                       int diskon;
-                                       total = jumlah * 20000;
-                                       diskon = (int) (total * 0.3);
-                                       bayar = (bayar + total)-diskon;
-                                       tampil += "\n"+"Anda mendapatkan diskon 30%"+"\n" + Cbxbakso.getText() + " Rp 20.000" + " x " + jumlah + " = " + total + "\n"+total+"-"+diskon+" = "+bayar+"\n";
-                                       st = st - jumlah;
-                                       stokBakso.setText(String.valueOf(st));}
-                           else if (jumlah <= st && jumlah <= 5) {
-                                total = jumlah * 20000;
-                                bayar = bayar + total;
-                                tampil += "\n" + Cbxbakso.getText() + " Rp 20.000" + " x " + jumlah + " = " + total + "\n";
-                                st = st - jumlah;
-                                stokBakso.setText(String.valueOf(st));}          
-                            } else {
-                                tampil += "Isi jumlah pesanan Anda" + "\n"; 
-                            }txapesan.setText(tampil + "=============================");
-                        } else {
-                            tampil += "Isi jumlah pesanan Anda" + "\n";
-                        } txapesan.setText(tampil + "=============================");     
-                    }
-
-        if (cbxayamgoreng.isSelected()) {
-            if (!txtjumlah2.getText().isEmpty()) {
-                int jumlah = Integer.parseInt(txtjumlah2.getText());
-                if (jumlah > 0) { 
-                    int total = 0;
-                    int st = Integer.parseInt(stokAyamgoreng.getText());
-                    if (jumlah <= st) {
-                        total = jumlah * 25000;
-                        bayar = bayar + total;
-                        tampil += "\n" + cbxayamgoreng.getText() + " Rp 25.000" + " x " + jumlah + " = " + total + "\n";
-                        st = st - jumlah;
-                        stokAyamgoreng.setText(String.valueOf(st));
-                    } else {
-                        tampil += "\n"+"MAAF STOK AYAM GORENG TIDAK CUKUP" + "\n";
-                    } txapesan.setText(tampil + "============================="+"\n");
-                } else {
-                    tampil += "Isi jumlah pesanan Anda" + "\n"; 
-                } txapesan.setText(tampil + "=============================");
-            } else {
-                tampil += "Isi jumlah pesanan Anda" + "\n";
-            }txapesan.setText(tampil + "=============================");
-            
-           
+        bayar = 0;
+        // menu makanan
+        menu = null;
+        menu = new ModelMenu[10];
+        for (int c = 0; c < menu.length; c++) {
+            menu[c] = new ModelMenu();
+            menu[c].setHarga(0);
+            menu[c].setId(c);
+            menu[c].setJenis(false);
+            menu[c].setJumlah(0);
+            menu[c].setNama("");
+            menu[c].setPilih(false);
         }
-       
-        if (cbxmieayam.isSelected()) {      
-            if (!txtjumlah3.getText().isEmpty()) {
-                int jumlah = Integer.parseInt(txtjumlah3.getText());
-                if (jumlah > 0) { 
-                    int total = 0;
-                    int st = Integer.parseInt(stokMieayam.getText());
-                    if (jumlah <= st) {
-                        total = jumlah * 18000;
-                        bayar = bayar + total;
-                        tampil += "\n" + cbxmieayam.getText() + " Rp 18.000" + " x " + jumlah + " = " + total + "\n";
-                        st = st - jumlah;
-                        stokMieayam.setText(String.valueOf(st));
-                    } else {
-                        tampil += "\n"+"MAAF STOK MIE AYAM TIDAK CUKUP" + "\n";
-                    }  txapesan.setText(tampil + "============================="+"\n");
-                } else {
-                    tampil += "Isi jumlah pesanan Anda" + "\n"; 
-                } txapesan.setText(tampil + "=============================");
-            } else {
-                tampil += "Isi jumlah pesanan Anda" + "\n";
-            }txapesan.setText(tampil + "=============================");
-          
-           
-        }
+        menu[0].setDiskon(0.3);
+        menu[6].setDiskon(0.2);
+        stokBakso.setText(pilihMaki(0, txtjumlah1, 20000, stokBakso, Cbxbakso, "BAKSO"));
+        stokAyamgoreng.setText(pilihMaki(1, txtjumlah2, 25000, stokAyamgoreng, cbxayamgoreng, "AYAM GORENG"));
+        stokMieayam.setText(pilihMaki(2, txtjumlah3, 18000, stokMieayam, cbxmieayam, "MIE AYAM"));
+        stokSate.setText(pilihMaki(3, txtjumlah4, 20000, stokSate, cbxsate, "SATE"));
+        stokBatagor.setText(pilihMaki(4, txtjumlah5, 25000, stokBatagor, cbxbatagorkeju, "BATAGOR KEJU"));
+        // menu minuman
+        stokEsteh.setText(pilihMaki(5, txtjumlah6, 8000, stokEsteh, cbxesteh, "ES TEH"));
+        stokEsjeruk.setText(pilihMaki(6, txtjumlah7, 10000, stokEsjeruk, cbxesjeruk, "ES JERUK"));
+        stokAirmineral.setText(pilihMaki(7, txtjumlah8, 6000, stokAirmineral, cbxairmineral, "AIR  MINERAL"));
+        stokCapucino.setText(pilihMaki(8, txtjumlah9, 15000, stokCapucino, cbxcapucino, "CAPUCINO"));
+        stokMilktea.setText(pilihMaki(9, txtjumlah10, 15000, stokMilktea, cbxmilktea, "MILK TEA"));
+        Transaksi byr = new Transaksi();
+        byr.setVisible(true);
+        byr.setAlwaysOnTop(true);
      
-        if (cbxsate.isSelected()) {
-            if (!txtjumlah4.getText().isEmpty()) {
-                int jumlah = Integer.parseInt(txtjumlah4.getText());
-                if (jumlah > 0) { 
-                    int total = 0;
-                    int st = Integer.parseInt(stokSate.getText());
-                    if (jumlah <= st) {
-                        total = jumlah *20000;
-                        bayar = bayar + total;
-                        tampil += "\n" + cbxsate.getText() + " Rp 20.000" + " x " + jumlah + " = " + total + "\n";
-                        st = st - jumlah;
-                        stokSate.setText(String.valueOf(st));
-                    } else {
-                        tampil += "\n"+"MAAF STOK SATE TIDAK CUKUP" + "\n";
-                    }  txapesan.setText(tampil + "============================="+"\n");
-                } else {
-                    tampil += "Isi jumlah pesanan Anda" + "\n"; 
-                } txapesan.setText(tampil + "=============================");
-            } else {
-                tampil += "Isi jumlah pesanan Anda" + "\n";
-            } txapesan.setText(tampil + "============================="); 
-        }
-       
-        if (cbxbatagorkeju.isSelected()) {       
-            if (!txtjumlah5.getText().isEmpty()) {
-                int jumlah = Integer.parseInt(txtjumlah5.getText());
-                if (jumlah > 0) { 
-                    int total = 0;
-                    int st = Integer.parseInt(stokBatagor.getText());
-                    if (jumlah <= st) {
-                        total = jumlah *25000;
-                        bayar = bayar + total;
-                        tampil += "\n" + cbxbatagorkeju.getText() + " Rp 25.000" + " x " + jumlah + " = " + total + "\n";
-                        st = st - jumlah;
-                        stokBatagor.setText(String.valueOf(st));
-                    } else {
-                        tampil += "\n"+"MAAF STOK BATAGOR KEJU TIDAK CUKUP" + "\n";
-                    }  txapesan.setText(tampil + "============================="+"\n");
-                } else {
-                    tampil += "Isi jumlah pesanan Anda" + "\n"; 
-                } txapesan.setText(tampil + "=============================");
-            } else {
-                tampil += "Isi jumlah pesanan Anda" + "\n";
-            } txapesan.setText(tampil + "=============================");        
-        }
-     
-        if (cbxesteh.isSelected()) { 
-            if (!txtjumlah6.getText().isEmpty()) {
-                int jumlah = Integer.parseInt(txtjumlah6.getText());
-                if (jumlah > 0) { 
-                    int total = 0;
-                    int st = Integer.parseInt(stokEsteh.getText());
-                    if (jumlah <= st) {
-                        total = jumlah * 8000;
-                        bayar = bayar + total;
-                        tampil += "\n" + cbxesteh.getText() + " Rp 8.000" + " x " + jumlah + " = " + total + "\n";
-                        st = st - jumlah;
-                        stokEsteh.setText(String.valueOf(st));
-                    } else {
-                        tampil += "\n"+"MAAF STOK ES TEH TIDAK CUKUP" + "\n";
-                    }  txapesan.setText(tampil + "============================="+"\n");
-                } else {
-                    tampil += "Isi jumlah pesanan Anda" + "\n"; 
-                } txapesan.setText(tampil + "=============================");
-            } else {
-                tampil += "Isi jumlah pesanan Anda" + "\n";
-            } txapesan.setText(tampil + "=============================");          
-        }
-       
-        if (cbxesjeruk.isSelected()) {
-            if (!txtjumlah7.getText().isEmpty()) {
-                int jumlah = Integer.parseInt(txtjumlah7.getText());
-                    if (jumlah > 0) { 
-                    int total = 0;
-                    int st = Integer.parseInt(stokEsjeruk.getText());
-                    if (jumlah>st){
-                             tampil += "MAAF STOK ES JERUK TIDAK CUKUP" + "\n"; 
-                             txapesan.setText(tampil + "=============================");
-                            }
-                    else if (jumlah <= st && jumlah>6 && jumlah <= 50) {
-                                       int diskon;
-                                       int ttljeruk;
-                                       total = jumlah * 10000;
-                                       diskon = (int) (total * 0.2);
-                                       bayar = bayar + (total - diskon);
-                                       ttljeruk = total - diskon;
-                                       tampil += "\n"+"Anda mendapatkan diskon 20%"+"\n" + cbxesjeruk.getText() + " Rp 20.000" + " x " + jumlah + " = " + total + "\n"+total+"-"+diskon+" = "+ttljeruk+"\n";
-                                       st = st - jumlah;
-                                       stokEsjeruk.setText(String.valueOf(st));}
-                 else   if (jumlah <= st && jumlah <= 6) {
-                        total = jumlah *10000;
-                        bayar = bayar + total;
-                        tampil += "\n" + cbxesjeruk.getText() + " Rp 10.000" + " x " + jumlah + " = " + total + "\n";
-                        st = st - jumlah;
-                        stokEsjeruk.setText(String.valueOf(st));
-                    }
-                } else {
-                    tampil += "Isi jumlah pesanan Anda" + "\n"; 
-                } txapesan.setText(tampil + "=============================");
-            } else {
-                tampil += "Isi jumlah pesanan Anda" + "\n";
-            } txapesan.setText(tampil + "=============================");         
-        }
-        
-        if (cbxairmineral.isSelected()) {         
-            if (!txtjumlah8.getText().isEmpty()) {
-                int jumlah = Integer.parseInt(txtjumlah8.getText());
-                if (jumlah > 0) { 
-                    int total = 0;
-                    int st = Integer.parseInt(stokAirmineral.getText());
-                    if (jumlah <= st) {
-                        total = jumlah *6000;
-                        bayar = bayar + total;
-                        tampil += "\n" + cbxairmineral.getText() + " Rp 6.000" + " x " + jumlah + " = " + total + "\n";
-                        st = st - jumlah;
-                        stokAirmineral.setText(String.valueOf(st));
-                    } else {
-                        tampil += "\n"+"MAAF STOK AIR MINERAL TIDAK CUKUP" + "\n";
-                    }  txapesan.setText(tampil + "============================="+"\n");
-                } else {
-                    tampil += "Isi jumlah pesanan Anda" + "\n"; 
-                } txapesan.setText(tampil + "=============================");
-            } else {
-                tampil += "Isi jumlah pesanan Anda" + "\n";
-            } txapesan.setText(tampil + "=============================");    
-        }
-      
-        if (cbxcapucino.isSelected()) {
-            if (!txtjumlah9.getText().isEmpty()) {
-                int jumlah = Integer.parseInt(txtjumlah9.getText());
-                if (jumlah > 0) { 
-                    int total = 0;
-                    int st = Integer.parseInt(stokCapucino.getText());
-                    if (jumlah <= st) {
-                        total = jumlah *15000;
-                        bayar = bayar + total;
-                        tampil += "\n" + cbxcapucino.getText() + " Rp 15.000" + " x " + jumlah + " = " + total + "\n";
-                        st = st - jumlah;
-                        stokCapucino.setText(String.valueOf(st));
-                    } else {
-                        tampil += "\n"+"MAAF STOK CAPUCINO TIDAK CUKUP" + "\n";
-                    }  txapesan.setText(tampil + "============================="+"\n");
-                } else {
-                    tampil += "Isi jumlah pesanan Anda" + "\n"; 
-                } txapesan.setText(tampil + "=============================");
-            } else {
-                tampil += "Isi jumlah pesanan Anda" + "\n";
-            } txapesan.setText(tampil + "=============================");  
-        }
-       
-        if (cbxmilktea.isSelected()) {       
-            if (!txtjumlah10.getText().isEmpty()) {
-                int jumlah = Integer.parseInt(txtjumlah10.getText());
-                if (jumlah > 0) { 
-                    int total = 0;
-                    int st = Integer.parseInt(stokMilktea.getText());
-                    if (jumlah <= st) {
-                        total = jumlah * 15000;
-                        bayar = bayar + total;
-                        tampil += "\n" + cbxmilktea.getText() + " Rp 15.000" + " x " + jumlah + " = " + total + "\n";
-                        st = st - jumlah;
-                        stokMilktea.setText(String.valueOf(st));
-                    } else {
-                        tampil += "\n"+"MAAF STOK MILK TEA TIDAK CUKUP" + "\n";
-                    }  txapesan.setText(tampil + "============================="+"\n");
-                } else {
-                    tampil += "Isi jumlah pesanan Anda" + "\n"; 
-                } txapesan.setText(tampil + "=============================");
-            } else {
-                tampil += "Isi jumlah pesanan Anda" + "\n";
-            }txapesan.setText(tampil + "=============================");    
-        }
-          txapesan.setText(tampil + "============================="+"\n"+"Total bayar"+"\n"+ " Rp. "+bayar);
     }//GEN-LAST:event_btnpesanActionPerformed
+
+    // pungsi nomor
+    private String fNo(int e) {
+        DecimalFormat df = new DecimalFormat("#,###");
+        return df.format(e);
+    }
+    private String fNodesimal(float e) {
+        DecimalFormat df = new DecimalFormat("#,###");
+        return df.format(e);
+    }
+
+    //PilihMaki
+    private String pilihMaki(int nomor, JTextField jum, int hrg, JLabel stok, JCheckBox cbPilih, String info) {
+        
+        
+        if (cbPilih.isSelected()) {
+            if (!jum.getText().isEmpty()) {
+                int jumlah = Integer.parseInt(jum.getText());
+                if (jumlah > 0) {
+                    int total = 0;
+                    int st = Integer.parseInt(stok.getText());
+                    if (jumlah <= st) {
+                        if (jumlah > 5 && info.equals("BAKSO")){
+                        diskon = (float) (0.3 * (jumlah * hrg)) ;
+                        }
+//                       else {
+//                            diskon = 0;  
+//                        }
+                       else  if (jumlah > 6 && info.equals("ES JERUK")){
+                        diskon = (float) (0.2 * (jumlah * hrg)) ;
+                        }
+                          else{
+                            diskon = 0;  
+                        }
+                        total = jumlah * hrg;
+                        bayar = (int) ((bayar + total)-diskon);
+                        tampil += cbPilih.getText() + " " + fNo(hrg) + " x " + jumlah + " = " + fNo(total)  +"\n" + "\nDiskon = "+fNodesimal(diskon)+"\n" +"Total bayar"+ " = " + fNo(bayar)+"\n";
+                        st = st - jumlah;
+                        menu[nomor].setHarga(hrg);
+                        menu[nomor].setJumlah(jumlah);
+                        menu[nomor].setNama(info);
+                        menu[nomor].setDiskon(diskon);
+                        menu[nomor].setPilih(true);
+                        txapesan.setText(tampil);
+                        return String.valueOf(st);
+                    } else {
+                        tampil += "\n" + "MAAF STOK " + info + " TIDAK CUKUP" + "\n";
+                    }
+                    txapesan.setText(tampil + "=============================" + "\n");
+                } else {
+                    tampil += "Isi jumlah pesanan Anda" + "\n";
+                }
+                txapesan.setText(tampil + "=============================");
+            } else {
+                tampil += "Isi jumlah pesanan Anda" + "\n";
+            }
+            txapesan.setText(tampil + "=============================");
+        }
+        txapesan.setText(tampil + "============================="+"\n");
+        return stok.getText();
+    }
+
 
     private void cbxestehActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxestehActionPerformed
         // TODO add your handling code here:
@@ -933,7 +765,7 @@ public class Tampilan extends javax.swing.JFrame {
     private void txtjumlah1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtjumlah1KeyPressed
 
         Cbxbakso.setSelected(true);
-      
+
     }//GEN-LAST:event_txtjumlah1KeyPressed
 
     private void txtjumlah1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtjumlah1FocusLost

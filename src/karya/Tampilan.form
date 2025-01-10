@@ -921,7 +921,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="360" y="100" width="910" height="1150"/>
+              <AbsoluteConstraints x="420" y="90" width="910" height="1150"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -956,7 +956,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Beli Es Jeruk lebih Dari 6. Diskon 20%"/>
+            <Property name="text" type="java.lang.String" value="Beli Es Jeruk lebih Dari 5. Diskon 30%"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
