@@ -93,11 +93,11 @@ private String fNo(double e){
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        namajalan8.setBackground(new java.awt.Color(255, 255, 204));
+        namajalan8.setBackground(new java.awt.Color(204, 204, 204));
 
         header.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         header.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        header.setText("RUMAH MAKAN RICA");
+        header.setText("Toko Reski");
         header.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         btnBatal1.setBackground(new java.awt.Color(255, 0, 0));

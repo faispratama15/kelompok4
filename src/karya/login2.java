@@ -42,7 +42,7 @@ public class login2 extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 102));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel1.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 48)); // NOI18N
         jLabel1.setText("LOGIN");
@@ -148,21 +148,21 @@ public class login2 extends javax.swing.JFrame {
             username.setText("");
             password.setText("");
             username.requestFocus(); 
-        }else if (!user.equals("kelompok4") && !pasword.equals("RICAKER")){
+        }else if (!user.equals("ADMIN") && !pasword.equals("ADMIN123")){
             javax.swing.JOptionPane.showMessageDialog(null, "MAAF, USERNAME DAN PASSWORD SALAH !!");
             username.setText("");
             password.setText("");
             username.requestFocus();     
-        }else if (!user.equals("kelompok4") && pasword.equals("RICAKER")){
-            javax.swing.JOptionPane.showMessageDialog(null, "MAAF USERNAME SALAH !!");
-            username.setText("");
-            password.setText("");
-            username.requestFocus();     
-        }else if (user.equals("kelompok4") && !pasword.equals("RICAKER")){
-            javax.swing.JOptionPane.showMessageDialog(null, "MAAF PASSWORD SALAH !!");
-            username.setText("");
-            password.setText("");
-            username.requestFocus();     
+//        }else if (!user.equals("kelompok4") && pasword.equals("RICAKER")){
+//            javax.swing.JOptionPane.showMessageDialog(null, "MAAF USERNAME SALAH !!");
+//            username.setText("");
+//            password.setText("");
+//            username.requestFocus();     
+//        }else if (user.equals("kelompok4") && !pasword.equals("RICAKER")){
+//            javax.swing.JOptionPane.showMessageDialog(null, "MAAF PASSWORD SALAH !!");
+//            username.setText("");
+//            password.setText("");
+//            username.requestFocus();     
         }else{
            this.setVisible(false);
            new Tampilan().setVisible(true);   
